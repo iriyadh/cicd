@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestRunner.HybridRunner" tests="5" skipped="0" failures="2" errors="0" timestamp="2023-03-04T12:11:15" hostname="RIYADHS-THINKPA" time="72.617">
+  <properties/>
+  <testcase name="runScenario[0](&quot;Add new customer into the system&quot;, &quot;Optional[AddCustomer]&quot;)" classname="TestRunner.HybridRunner" time="8.942">
+    <failure message="java.lang.NoSuchMethodError: org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(Lorg/openqa/selenium/WebDriver;J)V" type="java.lang.NoSuchMethodError">java.lang.NoSuchMethodError: org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(Lorg/openqa/selenium/WebDriver;J)V
+	at Core.BrowserClass.alertt(BrowserClass.java:77)
+	at WebStepDefs.AddStepDefs.clickOk(AddStepDefs.java:39)
+	at ✽.click ok(file:///D:/Automation%20Practice/Day1/AutomationFramework/HybridFramework/src/test/resources/Feature/01.addcustomer.feature:8)
+</failure>
+  </testcase>
+  <testcase name="runScenario[1](&quot;api check for pages&quot;, &quot;Optional[API]&quot;)" classname="TestRunner.HybridRunner" time="2.092"/>
+  <testcase name="runScenario[2](&quot;check user registration successfully&quot;, &quot;Optional[User Registration]&quot;)" classname="TestRunner.HybridRunner" time="0.754"/>
+  <testcase name="runScenario[3](&quot;user login&quot;, &quot;Optional[AppTest]&quot;)" classname="TestRunner.HybridRunner" time="35.22"/>
+  <testcase name="runScenario[4](&quot;User make payment&quot;, &quot;Optional[AppAutomation]&quot;)" classname="TestRunner.HybridRunner" time="25.602">
+    <failure message="java.lang.NoSuchMethodError: org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(Lorg/openqa/selenium/WebDriver;J)V" type="java.lang.NoSuchMethodError">java.lang.NoSuchMethodError: org.openqa.selenium.support.ui.WebDriverWait.&lt;init&gt;(Lorg/openqa/selenium/WebDriver;J)V
+	at POM.EriBankWebElement.makePaymentFields(EriBankWebElement.java:61)
+	at StepDefinition.EriBankMakePaymentStepDefs.userInputPhoneAndNameAndCountry(EriBankMakePaymentStepDefs.java:24)
+	at ✽.User input '01611' and 'Riyadh' and '50'(file:///D:/Automation%20Practice/Day1/AutomationFramework/HybridFramework/src/test/resources/Feature/05.EriMakePayment.feature:6)
+</failure>
+  </testcase>
+  <system-out><![CDATA[
+@Test
+Scenario Outline: Add new customer into the system   # src/test/resources/Feature/01.addcustomer.feature:12
+  Given user in add customer page                    # WebStepDefs.AddStepDefs.userInAddCustomerPage()
+  When user enter 'Iftekhar' and 'Riyadh' and '1212' # WebStepDefs.AddStepDefs.userEnterFirstnameAndLastnameAndPostcode(java.lang.String,java.lang.String,java.lang.String)
+  And click addcustomer button                       # WebStepDefs.AddStepDefs.clickAddcustomerButton()
+  Then click ok                                      # WebStepDefs.AddStepDefs.clickOk()
+      java.lang.NoSuchMethodError: org.openqa.selenium.support.ui.WebDriverWait.<init>(Lorg/openqa/selenium/WebDriver;J)V
+	at Core.BrowserClass.alertt(BrowserClass.java:77)
+	at WebStepDefs.AddStepDefs.clickOk(AddStepDefs.java:39)
+	at âœ½.click ok(file:///D:/Automation%20Practice/Day1/AutomationFramework/HybridFramework/src/test/resources/Feature/01.addcustomer.feature:8)
+
+
+@Test
+Scenario Outline: api check for pages # src/test/resources/Feature/02.getApi.feature:9
+  Given user has the base url         # StepDefinition.ApiStepDefinitions.userHasTheBaseUrl()
+https://reqres.in/api/users?page=2
+Control here in api call
+http://localhosthttps://reqres.in/api/users?page=2
+{"page":2,"per_page":6,"total":12,"total_pages":2,"data":[{"id":7,"email":"michael.lawson@reqres.in","first_name":"Michael","last_name":"Lawson","avatar":"https://reqres.in/img/faces/7-image.jpg"},{"id":8,"email":"lindsay.ferguson@reqres.in","first_name":"Lindsay","last_name":"Ferguson","avatar":"https://reqres.in/img/faces/8-image.jpg"},{"id":9,"email":"tobias.funke@reqres.in","first_name":"Tobias","last_name":"Funke","avatar":"https://reqres.in/img/faces/9-image.jpg"},{"id":10,"email":"byron.fields@reqres.in","first_name":"Byron","last_name":"Fields","avatar":"https://reqres.in/img/faces/10-image.jpg"},{"id":11,"email":"george.edwards@reqres.in","first_name":"George","last_name":"Edwards","avatar":"https://reqres.in/img/faces/11-image.jpg"},{"id":12,"email":"rachel.howell@reqres.in","first_name":"Rachel","last_name":"Howell","avatar":"https://reqres.in/img/faces/12-image.jpg"}],"support":{"url":"https://reqres.in/#support-heading","text":"To keep ReqRes free, contributions towards server costs are appreciated!"}}
+  When user call the '?page' and '2'  # StepDefinition.ApiStepDefinitions.userCallTheParamsNameAndParamsValue(java.lang.String,java.lang.String)
+https://reqres.in/api/users?page=2
+Michael
+  Then it will return valid data      # StepDefinition.ApiStepDefinitions.itWillReturnValidData()
+
+@Test
+Scenario Outline: check user registration successfully # src/test/resources/Feature/03.userPostApi.feature:11
+  Given user got the api 'users'                       # StepDefinition.UserPostApi.userGotTheApiPath(java.lang.String)
+  When user hit 'riyadh' and 'qa'                      # StepDefinition.UserPostApi.userHitNameAndJob(java.lang.String,java.lang.String)
+https://reqres.in/api/users
+{Content-Type=application/json;charset=UTF-8}
+io.restassured.internal.RestAssuredResponseImpl@626e0c86
+  And call the api with body                           # StepDefinition.UserPostApi.callTheApiWithBody()
+2023-03-04T12:11:26.728Z
+  Then it will return valid response                   # StepDefinition.UserPostApi.itWillReturnValidResponse()
+
+@Test
+Scenario Outline: user login              # src/test/resources/Feature/04.AppTestAutomation.feature:11
+  Given app apk is there                  # StepDefinition.EriBankAppAutomationStepDefs.appApkIsThere()
+  When user enters 'company'and 'company' # StepDefinition.EriBankAppAutomationStepDefs.userEntersUsernameAndPass(java.lang.String,java.lang.String)
+test
+  Then user will navigate to home screen  # StepDefinition.EriBankAppAutomationStepDefs.userWillNavigateToHomeScreen()
+
+@Test
+Scenario Outline: User make payment             # src/test/resources/Feature/05.EriMakePayment.feature:13
+  Given Click Make Payment Button               # StepDefinition.EriBankMakePaymentStepDefs.clickMakePaymentButton()
+  When User input '01611' and 'Riyadh' and '50' # StepDefinition.EriBankMakePaymentStepDefs.userInputPhoneAndNameAndCountry(java.lang.String,java.lang.String,java.lang.String)
+      java.lang.NoSuchMethodError: org.openqa.selenium.support.ui.WebDriverWait.<init>(Lorg/openqa/selenium/WebDriver;J)V
+	at POM.EriBankWebElement.makePaymentFields(EriBankWebElement.java:61)
+	at StepDefinition.EriBankMakePaymentStepDefs.userInputPhoneAndNameAndCountry(EriBankMakePaymentStepDefs.java:24)
+	at âœ½.User input '01611' and 'Riyadh' and '50'(file:///D:/Automation%20Practice/Day1/AutomationFramework/HybridFramework/src/test/resources/Feature/05.EriMakePayment.feature:6)
+
+  And click select button                       # StepDefinition.EriBankMakePaymentStepDefs.clickSelectButton()
+  And click Send payment button                 # StepDefinition.EriBankMakePaymentStepDefs.clickSendPaymentButton()
+  Then Go to next page                          # StepDefinition.EriBankMakePaymentStepDefs.goToNextPage()
+]]></system-out>
+  <system-err><![CDATA[SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+1677931877307	geckodriver	INFO	Listening on 127.0.0.1:43342
+1677931878559	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "15929" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\IFTEKH~1\\AppData\\Local\\Temp\\rust_mozprofilecq10gQ"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1677931879020	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1677931879025	Marionette	INFO	Listening on port 63084
+Read port: 63084
+WebDriver BiDi listening on ws://127.0.0.1:15929
+1677931879190	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\IFTEKH~1\\AppData\\Local\\Temp\\rust_mozprofilecq10gQ\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:15929/devtools/browser/02a5eaec-adaa-4f92-8c20-dadb1099824c
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.globalsqa.com."
+1677931885287	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.sys.mjs:219:24
+TimedPromise@chrome://remote/content/marionette/sync.sys.mjs:204:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.sys.mjs:425:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:173:31
+]]></system-err>
+</testsuite>
